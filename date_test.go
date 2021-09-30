@@ -33,6 +33,8 @@ var excelTimeInputList = []dateTest{
 	{60.0, time.Date(1900, 2, 28, 0, 0, 0, 0, time.UTC)},
 	{61.0, time.Date(1900, 3, 1, 0, 0, 0, 0, time.UTC)},
 	{41275.0, time.Date(2013, 1, 1, 0, 0, 0, 0, time.UTC)},
+	// Test for 7:59 rounding error (should be 8:00)
+	{44450.3333333333, time.Date(2021, time.September, 11, 8, 0, 0, 0, time.UTC)},
 	{401769.0, time.Date(3000, 1, 1, 0, 0, 0, 0, time.UTC)},
 }
 
@@ -63,6 +65,7 @@ func TestTimeToExcelTime_Timezone(t *testing.T) {
 func TestTimeFromExcelTime(t *testing.T) {
 	for i, test := range excelTimeInputList {
 		t.Run(fmt.Sprintf("TestData%d", i+1), func(t *testing.T) {
+			t.Logf("expected %v, got %v", test.GoValue, timeFromExcelTime(test.ExcelValue, false))
 			assert.Equal(t, test.GoValue, timeFromExcelTime(test.ExcelValue, false))
 		})
 	}
