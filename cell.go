@@ -505,7 +505,7 @@ type FormulaOpts struct {
 //    import (
 //        "fmt"
 //
-//        "github.com/xuri/excelize/v2"
+//        "github.com/asicerik/excelize/v2"
 //    )
 //
 //    func main() {
@@ -778,7 +778,7 @@ func (f *File) GetCellRichText(sheet, cell string) (runs []RichTextRun, err erro
 //    import (
 //        "fmt"
 //
-//        "github.com/xuri/excelize/v2"
+//        "github.com/asicerik/excelize/v2"
 //    )
 //
 //    func main() {
