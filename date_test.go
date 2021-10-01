@@ -90,3 +90,19 @@ func TestExcelDateToTime(t *testing.T) {
 	_, err := ExcelDateToTime(-1, false)
 	assert.EqualError(t, err, "invalid date value -1.000000, negative values are not supported")
 }
+
+func TestUnitTimeSweep(t *testing.T) {
+	for hour := 0; hour < 24; hour++ {
+		for min := 0; min < 60; min++ {
+			for sec := 0; sec < 60; sec++ {
+				date := time.Date(2021, time.December, 30, hour, min, sec, 0, time.UTC)
+				excelTime, err := timeToExcelTime(date)
+				assert.NoError(t, err)
+				dateOut := timeFromExcelTime(excelTime, false)
+				assert.EqualValues(t, hour, dateOut.Hour())
+				assert.EqualValues(t, min, dateOut.Minute())
+				assert.EqualValues(t, sec, dateOut.Second())
+			}
+		}
+	}
+}
